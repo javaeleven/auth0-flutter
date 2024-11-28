@@ -1,12 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.auth0.auth0_flutter_example">
+    package="com.afreximbank.exco">
 
-   <application
-        android:label="auth0_flutter_example"
+    <!-- Add internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:label="Exco Automation"
         android:icon="@mipmap/ic_launcher"
-        tools:node="merge"
-        >
+        tools:node="merge">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,8 +32,18 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!-- <data 
+                    android:scheme="scheme"
+                    android:host="id.uat.afreximbank.net"
+                    android:pathPrefix="/android/com.afreximbank.exco/callback"
+                      /> -->
+            </intent-filter>
         </activity>
-
+        
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

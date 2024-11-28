@@ -6,25 +6,64 @@ class Auth0FlutterWebClientProxy {
 
   Auth0FlutterWebClientProxy({required this.client});
 
-  Future<void> loginWithRedirect(final RedirectLoginOptions options) =>
-      promiseToFuture(client.loginWithRedirect(options));
+  Future<void> loginWithRedirect(final RedirectLoginOptions options) async {
+    try {
+      await promiseToFuture(client.loginWithRedirect(options));
+    } catch (e) {
+      print('@@@@@@@@@@Error in loginWithRedirect: $e');
+    }
+  }
 
   Future<void> loginWithPopup(
-          [final PopupLoginOptions? options,
-          final PopupConfigOptions? config]) =>
-      promiseToFuture(client.loginWithPopup(options, config));
+      [final PopupLoginOptions? options,
+      final PopupConfigOptions? config]) async {
+    try {
+      await promiseToFuture(client.loginWithPopup(options, config));
+    } catch (e) {
+      print('@@@@@@@@@@Error in loginWithPopup: $e');
+    }
+  }
 
-  Future<void> checkSession() => promiseToFuture(client.checkSession());
+  Future<void> checkSession() async {
+    try {
+      await promiseToFuture(client.checkSession());
+    } catch (e) {
+      print('@@@@@@@@@@Error in checkSession: $e');
+    }
+  }
 
   Future<WebCredentials> getTokenSilently(
-          [final GetTokenSilentlyOptions? options]) =>
-      promiseToFuture(client.getTokenSilently(options));
+      [final GetTokenSilentlyOptions? options]) async {
+    try {
+      return await promiseToFuture(client.getTokenSilently(options));
+    } catch (e) {
+      print('@@@@@@@@@@Error in getTokenSilently: $e');
+      rethrow;
+    }
+  }
 
-  Future<void> handleRedirectCallback() =>
-      promiseToFuture(client.handleRedirectCallback());
+  Future<void> handleRedirectCallback() async {
+    try {
+      await promiseToFuture(client.handleRedirectCallback());
+    } catch (e) {
+      print('@@@@@@@@@@Error in handleRedirectCallback: $e');
+    }
+  }
 
-  Future<bool> isAuthenticated() => promiseToFuture(client.isAuthenticated());
+  Future<bool> isAuthenticated() async {
+    try {
+      return await promiseToFuture(client.isAuthenticated());
+    } catch (e) {
+      print('@@@@@@@@@@Error in isAuthenticated: $e');
+      rethrow;
+    }
+  }
 
-  Future<void> logout(final LogoutOptions? options) =>
-      promiseToFuture(client.logout(options));
+  Future<void> logout(final LogoutOptions? options) async {
+    try {
+      await promiseToFuture(client.logout(options));
+    } catch (e) {
+      print('@@@@@@@@@@Error in logout: $e');
+    }
+  }
 }

@@ -8,6 +8,7 @@ import com.auth0.auth0_flutter.request_handlers.MethodCallRequest
 import com.auth0.auth0_flutter.toMap
 import com.auth0.auth0_flutter.utils.assertHasProperties
 import io.flutter.plugin.common.MethodChannel
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val AUTH_LOGIN_METHOD = "auth#login"
@@ -53,7 +54,10 @@ class LoginApiRequestHandler : ApiRequestHandler {
 
             override fun onSuccess(credentials: Credentials) {
                 val scope = credentials.scope?.split(" ") ?: listOf()
-                val formattedDate = credentials.expiresAt.toInstant().toString()
+                val sdf =
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+
+                val formattedDate = sdf.format(credentials.expiresAt)
                 result.success(
                     mapOf(
                         "accessToken" to credentials.accessToken,

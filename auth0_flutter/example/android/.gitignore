@@ -10,3 +10,6 @@ key.properties
 **/*.keystore
 **/*.jks
 strings.xml
+
+# FVM Version Cache
+.fvm/

@@ -8,6 +8,7 @@ import com.auth0.android.result.Credentials
 import com.auth0.auth0_flutter.request_handlers.MethodCallRequest
 import com.auth0.auth0_flutter.toMap
 import io.flutter.plugin.common.MethodChannel
+import java.text.SimpleDateFormat
 import java.util.*
 
 class GetCredentialsRequestHandler : CredentialsManagerRequestHandler {
@@ -37,7 +38,11 @@ class GetCredentialsRequestHandler : CredentialsManagerRequestHandler {
 
             override fun onSuccess(credentials: Credentials) {
                 val scopes = credentials.scope?.split(" ") ?: listOf()
-                val formattedDate = credentials.expiresAt.toInstant().toString()
+                val sdf =
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+
+                val formattedDate = sdf.format(credentials.expiresAt)
+
                 result.success(
                     mapOf(
                         "accessToken" to credentials.accessToken,

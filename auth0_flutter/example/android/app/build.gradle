@@ -1,4 +1,4 @@
-def exampleAppApplicationId = 'com.auth0.auth0_flutter_example'
+def exampleAppApplicationId = 'com.afreximbank.exco'
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -28,7 +28,7 @@ apply plugin: 'org.jetbrains.kotlinx.kover'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdk 31
+    compileSdk 34
     if (project.android.hasProperty("namespace")) {
         namespace exampleAppApplicationId
     }
@@ -54,8 +54,10 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [auth0Domain: "$System.env.AUTH0_DOMAIN",
-                                auth0Scheme: "$System.env.AUTH0_CUSTOM_SCHEME"]
+        manifestPlaceholders = [
+            'auth0Domain': 'id.uat.afreximbank.net',
+            'auth0Scheme': 'scheme'
+        ]
 
         testOptions {
             unitTests.returnDefaultValues = true
