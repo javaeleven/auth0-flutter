@@ -90,6 +90,24 @@ class AuthService {
     }
   }
 
+  Future<Credentials> renewToken(String refreshToken) async {
+    late Credentials cred;
+    try {
+      cred = await auth0.api.renewCredentials(
+        refreshToken: refreshToken,
+        parameters: {
+          'connection': 'EXCO-Okta-Dev',
+          'audience': "https://exco-automation.afxm.local/",
+          'scope': 'openid profile email offline_access',
+        },
+      );
+    } catch (e) {
+      print('Renew token error: $e');
+      rethrow;
+    }
+    return cred;
+  }
+
   void logInChunks(String message, {int chunkSize = 1024}) {
     for (int i = 0; i < message.length; i += chunkSize) {
       int end =

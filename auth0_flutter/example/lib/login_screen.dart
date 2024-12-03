@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'auth_service.dart';
 import 'home_screen.dart';
@@ -27,6 +28,15 @@ class LoginScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(height: 40),
+              ElevatedButton(
+                  onPressed: () async {
+                    final _storage = FlutterSecureStorage();
+                    final rtkn =
+                        await _storage.read(key: 'refresh_token') ?? "";
+                    await _authService.renewToken(rtkn!);
+                  },
+                  child: Text("data")),
               SizedBox(height: 40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

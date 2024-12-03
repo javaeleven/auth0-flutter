@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'api_service.dart';
 import 'auth_service.dart';
@@ -54,7 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
               'Welcome to EXCO Portal',
               style: TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
+            ElevatedButton(
+                onPressed: () async {
+                  final _storage = FlutterSecureStorage();
+                  final rtkn = await _storage.read(key: 'refresh_token') ?? "";
+                  await _authService.renewToken(rtkn!);
+                },
+                child: Text("data")),
             // Add your main content here
           ],
         ),
